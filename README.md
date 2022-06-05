@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-=======
-# Labview
-
->>>>>>> Stashed changes
 # Sanal gerçeklik uyumlu akıllı eldiven ve rehabilitasyon yazılımı geliştirilmesi
 
 ## **Projenin Amacı**
@@ -17,7 +12,7 @@ Dünya üzerinde farklı sebeplerden dolayı ince motor kas hareketleri kısıtl
 * SteamVR
 * OpenGloves
 
-## LabWiew
+## LabView
 ![Algoritma](Fotolar/LabWiew.png) 
 
 ## Eldivenin Şeması
