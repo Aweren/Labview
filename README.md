@@ -1,5 +1,4 @@
-# Sanal gerçeklik uyumlu akıllı eldiven ve rehabilitasyon yazılımı geliştirilmesi
-# Emirhan Süzer 170519019
+# Sanal gerçeklik uyumlu akıllı eldiven ve rehabilitasyon yazılımı geliştirilmesi Emirhan Süzer 170519019
 
 ## **Projenin Amacı**
 
