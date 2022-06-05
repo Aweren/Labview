@@ -12,7 +12,7 @@ Dünya üzerinde farklı sebeplerden dolayı ince motor kas hareketleri kısıtl
 * SteamVR
 * OpenGloves
 
-## Labview
+## LabView
 ![Algoritma](Fotolar/LabWiew.png) 
 
 ## Eldivenin Şeması
