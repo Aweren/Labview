@@ -1,5 +1,3 @@
-# Labview
-
 # Sanal gerçeklik uyumlu akıllı eldiven ve rehabilitasyon yazılımı geliştirilmesi
 
 ## **Projenin Amacı**
