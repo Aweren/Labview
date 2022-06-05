@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+# Labview
+
+>>>>>>> Stashed changes
 # Sanal gerçeklik uyumlu akıllı eldiven ve rehabilitasyon yazılımı geliştirilmesi
 
 ## **Projenin Amacı**
