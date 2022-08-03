@@ -12,11 +12,16 @@ int Y_PIN = 39;
 int X_PIN_Zero, Y_PIN_Zero;                                                                       
 int X_PIN_Value, Y_PIN_Value;     
 
-const int FLEX_PIN = 27; //27
-const int FLEX_PIN1 = 32; // 25 Buna çok güvenme
-const int FLEX_PIN2 = 35; // 26
-const int FLEX_PIN3 = 34; // 33
+const int FLEX_PIN = 32; //27
+const int FLEX_PIN1 = 27; 
+const int FLEX_PIN2 = 35; //
+const int FLEX_PIN3 = 34; // 
 const int FLEX_PIN4 = 26; // pini bt de hata veriyor  BT OLARAK ÇALIŞMA
+
+const int A_button = 12;
+const int B_button = 13;
+const int SteamVR_Menu = 14;
+const int Calibration = 23;
 
 
   bool trgButton;
@@ -43,6 +48,8 @@ const int FLEX_PIN4 = 26; // pini bt de hata veriyor  BT OLARAK ÇALIŞMA
   
   int flexADC_min4 = 4096;
   int flexADC_max4 = 0;
+
+  String stringMain;
   
   int bos=0;
 void setup() 
@@ -55,22 +62,36 @@ void setup()
   pinMode(FLEX_PIN3, INPUT);
   pinMode(FLEX_PIN4, INPUT);  
 
+
+  pinMode(A_button, INPUT_PULLUP);
+  pinMode(B_button, INPUT_PULLUP);
+  pinMode(SteamVR_Menu, INPUT_PULLUP);
+  pinMode(Calibration, INPUT_PULLUP);
+
   
   pinMode(X_PIN, INPUT);                                                                        
   pinMode(X_PIN, INPUT);                                                                                                                                       
   delay(100);                                                                               
   X_PIN_Zero = analogRead(X_PIN);                                                              
   Y_PIN_Zero = analogRead(Y_PIN);  
+
      
 }
 
 void loop() 
 {
+
   int flexADC = analogRead(FLEX_PIN);
   int flexADC1 = analogRead(FLEX_PIN1);
   int flexADC2 = analogRead(FLEX_PIN2);
   int flexADC3 = analogRead(FLEX_PIN3);
   int flexADC4 = analogRead(FLEX_PIN4);
+
+
+  int A_buttonVal = digitalRead(A_button);
+  int B_buttonVal = digitalRead(B_button);
+  int SteamVR_MenuVal = digitalRead(SteamVR_Menu);
+  int CalibrationVal = digitalRead(Calibration);
 
   X_PIN_Value = analogRead(X_PIN) - X_PIN_Zero;                                                   
   Y_PIN_Value = analogRead(Y_PIN) - Y_PIN_Zero;                                                
@@ -81,12 +102,10 @@ void loop()
 if (X_PIN_Value < 2300 && X_PIN_Value > 1800) X_PIN_Value = 2048;
 if (Y_PIN_Value < 2300 && Y_PIN_Value > 1800) Y_PIN_Value = 2048;
 
-
-  flexADC = 4096 - flexADC;
   if (flexADC > flexADC_max) flexADC_max = flexADC;
   if (flexADC < flexADC_min) flexADC_min = flexADC;
   
-  flexADC = map(flexADC, flexADC_min, flexADC_max, 0, 4096);
+  flexADC = map(flexADC, flexADC_min, flexADC_max, 4096, 0);
 
   if (flexADC1 > flexADC_max1) flexADC_max1 = flexADC1;
   if (flexADC1 < flexADC_min1) flexADC_min1 = flexADC1;
@@ -96,7 +115,7 @@ if (Y_PIN_Value < 2300 && Y_PIN_Value > 1800) Y_PIN_Value = 2048;
   if (flexADC2 > flexADC_max2) flexADC_max2 = flexADC2;
   if (flexADC2 < flexADC_min2) flexADC_min2 = flexADC2;
   
-  flexADC2 = map(flexADC2, flexADC_min2, flexADC_max2, 0, 4096);
+  flexADC2 = map(flexADC2, flexADC_min2, flexADC_max2, 4096, 0);
   
   if (flexADC3 > flexADC_max3) flexADC_max3 = flexADC3;
   if (flexADC3 < flexADC_min3) flexADC_min3 = flexADC3;
@@ -144,11 +163,17 @@ if(flexADC2 < 2750 && flexADC3 < 2750 && flexADC4 < 2750 ){
   grab = false;
  }
 }
-////////////////////////////////////////
-if(grab == true && trgButton == true  ) SerialBT.println((String)"A"+flexADC+"B"+flexADC1+"C"+flexADC2+"D"+flexADC3+"E"+flexADC3+"F"+X_PIN_Value+"G"+Y_PIN_Value+"I"+"L");
-if(grab == true && trgButton == false  ) SerialBT.println((String)"A"+flexADC+"B"+flexADC1+"C"+flexADC2+"D"+flexADC3+"E"+flexADC3+"F"+X_PIN_Value+"G"+Y_PIN_Value+"L");
-if(grab == false && trgButton == true  ) SerialBT.println((String)"A"+flexADC+"B"+flexADC1+"C"+flexADC2+"D"+flexADC3+"E"+flexADC3+"F"+X_PIN_Value+"G"+Y_PIN_Value+"I");
-if(grab == false && trgButton == false  ) SerialBT.println((String)"A"+flexADC+"B"+flexADC1+"C"+flexADC2+"D"+flexADC3+"E"+flexADC3+"F"+X_PIN_Value+"G"+Y_PIN_Value);
+
+String stringMain = ((String)"A"+flexADC+"B"+flexADC1+"C"+flexADC2+"D"+flexADC3+"E"+flexADC4+"F"+X_PIN_Value+"G"+Y_PIN_Value);
+
+if(trgButton == true)stringMain += 'I';
+if(A_buttonVal == LOW)stringMain += 'J';
+if(B_buttonVal == LOW)stringMain += 'K';
+if(grab == true)stringMain += 'L';
+if(SteamVR_MenuVal == LOW)stringMain += 'N';
+if(CalibrationVal == LOW)stringMain += 'O';
+
+SerialBT.println(stringMain); 
 
  delay(10);
 }

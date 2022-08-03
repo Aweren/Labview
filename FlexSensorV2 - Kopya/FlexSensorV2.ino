@@ -48,7 +48,7 @@ const int FLEX_PIN4 = 26; // pini bt de hata veriyor  BT OLARAK ÇALIŞMA
 void setup() 
 {
   Serial.begin(115200);
-  SerialBT.begin("lucidgloves-left"); //Bluetooth device name
+  SerialBT.begin("lucidgloves-rigth"); //Bluetooth device name
   pinMode(FLEX_PIN, INPUT);
   pinMode(FLEX_PIN1, INPUT);
   pinMode(FLEX_PIN2, INPUT);
